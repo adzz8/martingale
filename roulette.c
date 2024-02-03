@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <time.h>
 
 /*
     colour 0 = green
@@ -11,8 +12,8 @@
 bool roulette(int colour){
     int pickednumber;
     int winningcolour;
+    srand(time(NULL));
     pickednumber = rand() % 37;
-    printf("%d", pickednumber);
     if (((pickednumber >= 1) && (pickednumber <= 10)) || ((pickednumber >= 19) && (pickednumber <= 28))){
         if (pickednumber%2 == 0){  
             winningcolour = 2;
@@ -32,12 +33,14 @@ bool roulette(int colour){
             winningcolour = 2;
         }
     }
-    return (winningcolour=colour);   
+    return (winningcolour==colour);   
 }
  
-int main(){
-    for(int i = 0; i<10; i++){
-       printf("Run %d outputs %d \n",i,roulette(1)); 
+float simGame(int colour, float bet){
+    if((roulette(colour) == 1)){
+        return(bet*2);
+    }
+    else{
+        return(0);
     }
 }
-
